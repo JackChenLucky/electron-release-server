@@ -5,7 +5,8 @@ WORKDIR /usr/src/electron-release-server
 
 # Install app dependencies
 COPY package.json .bowerrc bower.json /usr/src/electron-release-server/
-RUN npm install \
+RUN npm config set registry https://registry.npmmirror.com \
+  && npm install \
   && ./node_modules/.bin/bower install --allow-root \
   && npm cache clean --force \
   && npm prune --production
